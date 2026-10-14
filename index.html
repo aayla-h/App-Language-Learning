@@ -6,32 +6,107 @@
     <title>Sorani Kurdish Learning App</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f0f2f5;
             text-align: center;
-            background-color: #f4f4f9;
-            padding: 50px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         h1 {
-            color: #333;
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
         .card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 300px;
-            margin: 20px auto;
+            padding: 40px 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .kurdish-word {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .translation {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            transition: background 0.2s;
+            width: 100%;
+            max-width: 320px;
+        }
+        .btn:active {
+            background-color: #2980b9;
+        }
+        .counter {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #95a5a6;
         }
     </style>
 </head>
 <body>
 
-    <h1>Sorani Learning</h1>
+    <h1>Sorani Kurdish</h1>
+    <p class="subtitle">Phase 1: Survival Vocabulary</p>
     
-    <div class="card">
-        <p><strong>Word:</strong> سڵاو (Silaw)</p>
-        <p><strong>Meaning:</strong> Hello</p>
+    <div class="card" onclick="flipCard()">
+        <div id="wordDisplay" class="kurdish-word">سڵاو</div>
+        <div id="meaningDisplay" class="translation">Hello</div>
     </div>
+
+    <button class="btn" onclick="nextCard()">Next Word ➔</button>
+    <div id="counterDisplay" class="counter">Card 1 of 5</div>
+
+    <script>
+        // Our Phase 1 Vocabulary Deck
+        const deck = [
+            { kurdish: "سڵاو", meaning: "Hello (Silaw)" },
+            { kurdish: "چۆنی؟", meaning: "How are you? (Choni?)" },
+            { kurdish: "سوپاس", meaning: "Thank you (Supas)" },
+            { kurdish: "بەڵێ", meaning: "Yes (Bale)" },
+            { kurdish: "نا", meaning: "No (Na)" }
+        ];
+
+        let currentIndex = 0;
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % deck.length;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById("wordDisplay").innerText = deck[currentIndex].kurdish;
+            document.getElementById("meaningDisplay").innerText = deck[currentIndex].meaning;
+            document.getElementById("counterDisplay").innerText = `Card ${currentIndex + 1} of ${deck.length}`;
+        }
+    </script>
 
 </body>
 </html>
